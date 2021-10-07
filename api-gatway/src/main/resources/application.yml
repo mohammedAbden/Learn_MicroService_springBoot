@@ -1,0 +1,15 @@
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: DEPARTMENT-SERVICE
+          predicates:
+            - Path=/DEPARTMENT-SERVICE/**
+          uri: lb://DEPARTMENT-SERVICE
+          filters:
+            - RewritePath=/DEPARTMENT-SERVICE/(?<segment>.*), /$\{segment}
