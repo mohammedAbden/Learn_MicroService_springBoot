@@ -2,6 +2,7 @@ package com.abden.department.controller;
 
 import com.abden.department.model.Department;
 import com.abden.department.service.DepartmentService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,9 +16,9 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @RequestMapping("/dummy")
-    public Department getDummyDepartment() {
-        return departmentService.getDummyDepartment();
+    @RequestMapping("/{name}")
+    public Department getDummyDepartment(@PathVariable String name){
+        return departmentService.getDepartmentByName(name);
     }
 
 
