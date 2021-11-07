@@ -29,4 +29,8 @@ public class DepartmentService {
     public Department saveDepartment(Department department){
         return departmentRepository.save(department);
     }
+
+    public Department getDepartmentById(Long id) {
+        return departmentRepository.findById(id).orElseGet(null);
+    }
 }

@@ -16,9 +16,14 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("name/{name}")
     public Department getDepartmentByName(@PathVariable String name){
         return departmentService.getDepartmentByName(name);
+    }
+
+    @GetMapping("/{id}")
+    public Department getDepartmentById(@PathVariable Long id){
+        return departmentService.getDepartmentById(id);
     }
 
     @GetMapping("/")
