@@ -8,12 +8,20 @@ import org.springframework.web.client.RestTemplate;
 public class MicroserviceIntegrationService {
 
     private final RestTemplate restTemplate;
+    private final DepartmentIntegrationFeignClient departmentIntegrationFeignClient;
 
-    public MicroserviceIntegrationService(RestTemplate restTemplate) {
+    public MicroserviceIntegrationService(RestTemplate restTemplate, DepartmentIntegrationFeignClient departmentIntegrationFeignClient) {
         this.restTemplate = restTemplate;
+        this.departmentIntegrationFeignClient = departmentIntegrationFeignClient;
     }
 
-    public Department getDummyDepartment() {
-        return restTemplate.getForEntity("http://DEPARTMENT-SERVICE/department/dummy", Department.class).getBody();
+    public Department getDepartmentByName(String departmentName) {
+//        return restTemplate.getForEntity("http://DEPARTMENT-SERVICE/department/name/"+departmentName, Department.class).getBody();
+       return departmentIntegrationFeignClient.getDepartmentByName(departmentName);
+    }
+
+    public Department getDepartmentById(Long departmentId) {
+//        return restTemplate.getForEntity("http://DEPARTMENT-SERVICE/department/"+departmentId, Department.class).getBody();
+        return departmentIntegrationFeignClient.getDepartmentById(departmentId);
     }
 }

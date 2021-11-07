@@ -1,10 +1,13 @@
 package com.abden.employeeservice.controller;
 
+import com.abden.employeeservice.model.Employee;
+import com.abden.employeeservice.model.EmployeeDTO;
 import com.abden.employeeservice.model.EmployeeDepartmentVO;
 import com.abden.employeeservice.service.EmployeeService;
 import com.abden.employeeservice.service.MicroserviceIntegrationService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -19,12 +22,14 @@ public class EmployeeController {
         this.microserviceIntegrationService = microserviceIntegrationService;
     }
 
-    @RequestMapping("/dummy")
-    public EmployeeDepartmentVO getDummyEmployee() {
-        return EmployeeDepartmentVO.builder()
-                .employee(employeeService.getDummyEmployee())
-                .department(microserviceIntegrationService.getDummyDepartment())
-                .build();
+    @GetMapping("/")
+    public List<EmployeeDepartmentVO> getEmployees() {
+       return employeeService.getEmployees();
+    }
+
+    @PostMapping("/")
+    public Employee saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        return employeeService.saveEmployee(employeeDTO);
     }
 
 
