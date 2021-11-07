@@ -1,6 +1,7 @@
 package com.abden.department.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,10 +14,11 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long id;
-    public String name;
+    private Long id;
+    private String name;
 }
